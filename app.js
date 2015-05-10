@@ -2,8 +2,8 @@
 $(document).ready(function() { 
 
 var turns = ["X","O","X","O","X","O","X","O","X"];
-var lines = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[0,4,8],[6,4,2],[2,5,8]];
 var square;
+var lines = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[0,4,8],[6,4,2],[2,5,8]];
 $('.reset').fadeOut();
 
 
@@ -13,13 +13,12 @@ $('.reset').fadeOut();
     this.board = new Board();
   }
 
-  // Remember: prototypes are shared functions between all game instances
+  
   Game.prototype.nextPlayer = function() {
         this.currentFigure = turns.pop();  
   };
 
-  // `Game.prototype.init` kicks off a new game with a board and two players
-  Game.prototype.init = function() {
+  Game.prototype.play = function() {
     _this = this;
     $('.row-ca').on('click',function(){
       square = this;
@@ -55,23 +54,40 @@ $('.reset').fadeOut();
       cell2 = cell[line[1]].innerHTML;
       cell3 = cell[line[2]].innerHTML;
       if (cell1 !== "" && cell1 === cell2 && cell1 === cell3) {
-          $('.turn').text("Game Over");
+          $('.turn').text(cell2 + " Wins");
           $('.reset').fadeIn();
           alert(cell2 + " Wins");
           turns = [];
+          this.addCounter(cell2);
+          this.resetGame();
       }
     }
   };
 
+  Game.prototype.addCounter = function(team){
+      if (team === "X") {
+        this.player1.record += 1;
+        $('#recordX').text("Player X wins: " + this.player1.record);
+      }else{
+        this.player2.record += 1;
+        $('#recordO').text("Player O wins: " + this.player2.record);
+      }
+      
+  };
 
-  Game.prototype.reset = function(){
-    for (var i = 0; i < this.board.$cells.length; i++) {
-      console.log( this.board.$cells[i]);
-    }
+
+  Game.prototype.resetGame = function(){
+    _this = this;
+    $('.reset').on('click',function(){
+        for (var i = 0; i < _this.board.$cells.length; i++) {
+           _this.board.$cells[i].innerHTML = "";
+        }      
+        turns = ["X","O","X","O","X","O","X","O","X"];
+    });
   };
   
   function Player(team) {
-    this.team = team;
+    this.record = 0;
   }
 
   
@@ -88,6 +104,7 @@ $('.reset').fadeOut();
   };
 
   Board.prototype.marked = function() {
+      console.log(square.innerHTML);
       if (square.innerHTML === "") {
         return false;
       }
@@ -98,7 +115,7 @@ $('.reset').fadeOut();
 
   // Start the game!
   var game = new Game();
-  game.init();
+  game.play();
 
 
 
