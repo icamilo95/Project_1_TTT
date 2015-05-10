@@ -2,7 +2,9 @@
 $(document).ready(function() { 
 
 var turns = ["X","O","X","O","X","O","X","O","X"];
+var lines = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[0,4,8],[6,4,2],[2,5,8]];
 var square;
+$('.reset').fadeOut();
 
 
   function Game() {
@@ -13,11 +15,7 @@ var square;
 
   // Remember: prototypes are shared functions between all game instances
   Game.prototype.nextPlayer = function() {
-      if (turns.length === 0) {
-        return false;
-      } else {
-        this.nextFigure = turns.pop();  
-      }  
+        this.currentFigure = turns.pop();  
   };
 
   // `Game.prototype.init` kicks off a new game with a board and two players
@@ -25,43 +23,74 @@ var square;
     _this = this;
     $('.row-ca').on('click',function(){
       square = this;
-      _this.nextTurn();
-      _this.checkForWinner();
+      if (turns.length === 0) {
+          alert("Game Over");
+        }else{
+          if (_this.board.marked() === false) {
+            _this.nextTurn();
+            _this.checkForWinner();
+          } else {
+              alert("Try different spot");
+          }
+      }
     });
   };
 
   Game.prototype.nextTurn = function(){
-      if (this.nextPlayer() === false) {
-        alert("Pailas");
-      } else {
-        $('.turn').text('Turn: ' + this.nextFigure);
-        this.board.markSquare(this.nextFigure);       
-      }
+      this.nextPlayer();  
+        this.message();
+        this.board.markSquare(this.currentFigure);       
   };
+
+  Game.prototype.message = function (){
+      $('.turn').text('Next turn: ' + turns[turns.length -1] );
+  };
+
 
   Game.prototype.checkForWinner = function(){
-    console.log("Yes");
+    var cell = this.board.$cells;
+    for (var i = 0; i < lines.length; i++) {
+      line = lines[i];
+      cell1 = cell[line[0]].innerHTML;
+      cell2 = cell[line[1]].innerHTML;
+      cell3 = cell[line[2]].innerHTML;
+      if (cell1 !== "" && cell1 === cell2 && cell1 === cell3) {
+          $('.turn').text("Game Over");
+          $('.reset').fadeIn();
+          alert(cell2 + " Wins");
+          turns = [];
+      }
+    }
   };
 
 
-  // A starter Player constructor.
+  Game.prototype.reset = function(){
+    for (var i = 0; i < this.board.$cells.length; i++) {
+      console.log( this.board.$cells[i]);
+    }
+  };
+  
   function Player(team) {
     this.team = team;
-    this.marks = [];
   }
 
-  // A starter Board constructor.
+  
   function Board() {
     this.$cells = $('.row-ca');   
-    //Store any other properties that board may have below, such as a reset option
   }
 
   Board.prototype.markSquare = function(team){
     for(var i=0; i< this.$cells.length; i++){
         if (this.$cells[i] === square) {
-            square.innerHTML = team;           
+              square.innerHTML = team;           
         }
     }
+  };
+
+  Board.prototype.marked = function() {
+      if (square.innerHTML === "") {
+        return false;
+      }
   };
 
   
