@@ -16,11 +16,34 @@
 </head>
 <body>
   <!-- HTML Body -->
-  <h2>Tic Tac Toe</h2>
-    <div class="row">
-      <div class="col-xs-3 "><h4 class="turn">Next turn: X</h4></div>
-      <div class="col-xs-3"><h4 id="recordX">Player X wins: 0</h4></div>
-      <div class="col-xs-3"><h4 id="recordO">Player O wins: 0</h4></div>
+  
+  <!-- Nav Bar -->
+  <nav class="navbar navbar-default navbar-static-top">
+    <div class="container">
+      <ul class="nav nav-pills">
+        <li role="presentation"><a href="#">Home</a></li>
+        <li role="presentation"><a href="#">Games</a></li>
+        <li role="presentation" class="active"><a href="#">Tic Tac Toe</a></li>
+        <li role="presentation"><a href="#">About</a></li>
+        <li role="presentation"><a href="#">Carrers</a></li>
+        <li role="presentation"><a href="#">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+    <!-- BACKGROUND --> 
+<div id="Background" class="jumbotron jumbo">
+  <h1 class="bg-primary bar">Tic Tac Toe! With Objects</h1>
+  
+    <!-- GAME -->
+    <!-- Players Info -->
+    <div class="row ">
+      <div class="col-xs-3 "></div>
+      <div class="col-xs-2 "><pre><h4 class="turn">Next turn: X</h4></pre></div>
+      <div class="col-xs-2">
+        <h4 id="recordX">Player X wins: 0</h4>
+        <h4 id="recordO">Player O wins: 0</h4>
+      </div>
       <div class="col-xs-2"><button class="reset">Reset</button></div>
     </div>  
   <hr>
@@ -28,30 +51,31 @@
   <!-- Tic Tac Toe Board here -->
   <div class="container">
     <div class="row">
-      <div class="col-xs-3 "></div>
+      <div class="col-xs-4 "></div>
       <div class="col-xs-2 row-ca" id="1"></div>
       <div class="col-xs-2 row-ca" id="2"></div>
       <div class="col-xs-2 row-ca" id="3"></div>
-      <div class="col-xs-3 "></div>
+      <div class="col-xs-2 "></div>
     </div>  
 
     <div class="row">
-      <div class="col-xs-3 "></div>
+      <div class="col-xs-4 "></div>
       <div class="col-xs-2 row-ca" id="4"></div>
       <div class="col-xs-2 row-ca" id="5"></div>
       <div class="col-xs-2 row-ca" id="6"></div>
-      <div class="col-xs-3 "></div>
+      <div class="col-xs-2 "></div>
     </div>  
 
     <div class="row">
-      <div class="col-xs-3 "></div>
+      <div class="col-xs-4 "></div>
       <div class="col-xs-2 row-ca" id="7"></div>
       <div class="col-xs-2 row-ca" id="8"></div>
       <div class="col-xs-2 row-ca" id="9"></div>
-      <div class="col-xs-3 "></div>
+      <div class="col-xs-2 "></div>
     </div>  
   </div>
-
-  <!-- Reset button -->
+</div>
+  
+<footer> 2015 Camilo Ordonez. </footer>  
 </body>
 </html>

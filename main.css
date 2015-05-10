@@ -1,6 +1,74 @@
 /* Style Sheet */
-.row-ca {
-   border: 1px solid black;
-   height: 100px;
 
+
+.jumbotron > h1 {
+   text-align: center;
+   font-family:Optima,Segoe,"Segoe UI",Candara,Calibri,Arial,sans-serif;
+   color: white;
+   font-size: 40px;
+}
+
+/*GREEN HEADER*/
+.bg-primary {
+   margin-top: -10px;
+   margin-bottom: 70px;
+   background-color: #9C1209;
+}
+
+/*NAV BAR*/
+.nav {
+   margin: 5px;
+}
+
+/*BOARD*/
+.row-ca {
+   border: 1px solid white;
+   height: 100px;
+   width: 100px;
+   
+   background-color: rgba(0,128,55,1);
+   font-size: 70px;
+   text-align: center;
+   color: white;
+}
+
+.colors1 {
+   background-color: rgb(30,66,140);
+}
+
+.colors2 {
+   background-color: rgba(174,20,175,1);
+}
+
+.bar{
+   margin-bottom: 20px;
+}
+
+#pre{
+   margin-top: 30px;
+}
+
+.jumbo {
+   margin-bottom: 0;
+}
+
+.turn {
+   text-align: center;
+}
+
+#recordX {
+   margin-top: 5px;
+}
+
+.reset {
+   margin-top: 18px;
+}
+
+footer {
+   height: 40px;
+   background-color: #9C1209;
+   position: relative;
+   color: white;
+   text-align: center;
+   padding-top: 10px;
 }

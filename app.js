@@ -1,7 +1,7 @@
 // OOP Tic Tac Toe boilerplate code
 $(document).ready(function() { 
 
-var turns = ["X","O","X","O","X","O","X","O","X"];
+var turns = ["Tie Game","X","O","X","O","X","O","X","O","X"];
 var square;
 var lines = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[0,4,8],[6,4,2],[2,5,8]];
 $('.reset').fadeOut();
@@ -19,7 +19,7 @@ $('.reset').fadeOut();
   };
 
   Game.prototype.play = function() {
-    _this = this;
+    var _this = this;
     $('.row-ca').on('click',function(){
       square = this;
       if (turns.length === 0) {
@@ -77,12 +77,14 @@ $('.reset').fadeOut();
 
 
   Game.prototype.resetGame = function(){
-    _this = this;
+    var _this = this;
     $('.reset').on('click',function(){
         for (var i = 0; i < _this.board.$cells.length; i++) {
            _this.board.$cells[i].innerHTML = "";
+           _this.board.$cells[i].setAttribute("class","col-xs-2 row-ca");
         }      
-        turns = ["X","O","X","O","X","O","X","O","X"];
+        turns = ["Tie Game","X","O","X","O","X","O","X","O","X"];
+        $('.turn').text('Next turn: X'  );
     });
   };
   
@@ -98,18 +100,19 @@ $('.reset').fadeOut();
   Board.prototype.markSquare = function(team){
     for(var i=0; i< this.$cells.length; i++){
         if (this.$cells[i] === square) {
-              square.innerHTML = team;           
+              square.innerHTML = team;
+              this.changeColor(team);           
         }
     }
   };
 
   Board.prototype.marked = function() {
-      console.log(square.innerHTML);
-      if (square.innerHTML === "") {
-        return false;
-      }
+      return square.innerHTML === "" ? false : true;
   };
 
+  Board.prototype.changeColor = function(team){
+    event.target.className += (team === "X") ? " colors1": " colors2";
+  };
   
 
 
